@@ -6,12 +6,15 @@ import java.util.List;
 
 public class PrintSchedule {
     public String print(List<SeminarDay> schedule){
+        String newLine = System.lineSeparator();
+        String dayText = "Day ";
+        String space = " - ";
         StringBuilder stringBuilder = new StringBuilder();
         for (int i = 0; i < schedule.size(); i++) {
             SeminarDay day = schedule.get(i);
-            stringBuilder.append("Day ").append(i + 1).append(" - ").append(day.getFormattedDate()).append("\n");
+            stringBuilder.append(dayText).append(i + 1).append(space).append(day.getFormattedDate()).append(newLine);
             stringBuilder.append(day.getSchedule());
-            stringBuilder.append("\n\n");
+            stringBuilder.append(newLine).append(newLine);
         }
         return stringBuilder.toString();
     }

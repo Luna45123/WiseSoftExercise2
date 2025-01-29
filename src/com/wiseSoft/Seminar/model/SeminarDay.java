@@ -11,7 +11,8 @@ public class SeminarDay {
     private final LocalDate date;
     private final List<SeminarTopic> morningSession = new ArrayList<>();
     private final List<SeminarTopic> afternoonSession = new ArrayList<>();
-    GetSchedule getSchedule = new GetSchedule();
+    private final GetSchedule getSchedule = new GetSchedule();
+    String datePattern = "dd/MM/";
 
     public SeminarDay(LocalDate date) {
         this.date = date;
@@ -27,7 +28,7 @@ public class SeminarDay {
 
     public String getFormattedDate() {
         int buddhistYear = date.getYear() + 543;
-        return date.format(DateTimeFormatter.ofPattern("dd/MM/")) + buddhistYear;
+        return date.format(DateTimeFormatter.ofPattern(datePattern)) + buddhistYear;
     }
 
     public String getSchedule() {
@@ -44,5 +45,17 @@ public class SeminarDay {
 
     public void AddAfternoonSession(SeminarTopic seminarTopic){
         afternoonSession.add(seminarTopic);
+    }
+
+    public List<SeminarTopic> getAllSession(){
+        List<SeminarTopic> allSessions = new ArrayList<>();
+        allSessions.addAll(morningSession);
+        allSessions.addAll(afternoonSession);
+        return allSessions;
+    }
+
+    public void removeSession(){
+        morningSession.clear();
+        afternoonSession.clear();
     }
 }

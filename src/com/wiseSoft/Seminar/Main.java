@@ -3,18 +3,22 @@ package com.wiseSoft.Seminar;
 import com.wiseSoft.Seminar.model.SeminarDay;
 import com.wiseSoft.Seminar.model.SeminarTopic;
 import com.wiseSoft.Seminar.service.PrintSchedule;
-import com.wiseSoft.Seminar.service.SeminarScheduler;
+import com.wiseSoft.Seminar.service.SeminarSchedulerService;
 
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) throws IOException {
-        List<String> input = Files.readAllLines(Path.of("src/input.txt"));
-        SeminarScheduler seminarScheduler = new SeminarScheduler();
+        System.out.print("Enter File Path: ");
+        Scanner sc = new Scanner(System.in);
+        String path = sc.next();
+        List<String> input = Files.readAllLines(Path.of(path));
+        SeminarSchedulerService seminarScheduler = new SeminarSchedulerService();
         PrintSchedule printSchedule = new PrintSchedule();
         // Input Data
         String startDate = input.getFirst();

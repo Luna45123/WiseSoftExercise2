@@ -6,18 +6,18 @@ import java.util.Iterator;
 import java.util.List;
 
 public class AssignToSession {
-    public void assignToSession(List<SeminarTopic> session, List<SeminarTopic> topics, int minDuration) {
+    public void assignToSession(List<SeminarTopic> session, List<SeminarTopic> topics, int maxDuration) {
 
         int currentDuration = session.stream().mapToInt(SeminarTopic::getDuration).sum();
         Iterator<SeminarTopic> iterator = topics.iterator();
 
         while (iterator.hasNext()) {
             SeminarTopic topic = iterator.next();
-            if (currentDuration + topic.getDuration() <= minDuration) {
+            if (currentDuration + topic.getDuration() <= maxDuration) {
                 session.add(topic);
                 currentDuration += topic.getDuration();
                 iterator.remove();
-                if (currentDuration >= minDuration){
+                if (currentDuration >= maxDuration){
                     break;
                 }
             }
