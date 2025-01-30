@@ -52,6 +52,10 @@ public class SeminarSchedulerService {
                         seminarDay.addAfternoonSession(allSessions.removeFirst());
                         afternoonSessionTime = seminarDay.getAfternoonSessionTime();
                     }
+                    //break if day full
+                    if (morningSessionTime + afternoonSessionTime >= maxDayTime){
+                        break;
+                    }
                 }
             }
 
