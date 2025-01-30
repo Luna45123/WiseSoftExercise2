@@ -43,8 +43,12 @@ public class SeminarDay {
         return morningSession.stream().mapToInt(SeminarTopic::getDuration).sum();
     }
 
-    public void AddAfternoonSession(SeminarTopic seminarTopic){
+    public void addAfternoonSession(SeminarTopic seminarTopic){
         afternoonSession.add(seminarTopic);
+    }
+
+    public void addMorningSession(SeminarTopic seminarTopic){
+        morningSession.add(seminarTopic);
     }
 
     public List<SeminarTopic> getAllSession(){
