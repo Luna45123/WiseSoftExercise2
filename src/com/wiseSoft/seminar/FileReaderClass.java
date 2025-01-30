@@ -1,4 +1,4 @@
-package com.wiseSoft.Seminar;
+package com.wiseSoft.seminar;
 
 import java.io.BufferedReader;
 import java.io.FileReader;

@@ -1,8 +1,8 @@
-package com.wiseSoft.Seminar.service;
+package com.wiseSoft.seminar.service;
 
-import com.wiseSoft.Seminar.model.SeminarDay;
-import com.wiseSoft.Seminar.model.SeminarTopic;
-import com.wiseSoft.Seminar.util.IncrementDate;
+import com.wiseSoft.seminar.model.SeminarDay;
+import com.wiseSoft.seminar.model.SeminarTopic;
+import com.wiseSoft.seminar.util.IncrementDate;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -28,21 +28,29 @@ public class SeminarSchedulerService {
         }
         // Add over day
         if ((days.getLast().getAfternoonSessionTime() + days.getLast().getMorningSessionTime()) < (morningMaxTime + afternoonMaxTime)) {
-            overDay.add(days.getLast());
+            if (!days.getLast().getMorningSession().isEmpty() || !days.getLast().getAfternoonSession().isEmpty()){
+                overDay.add(days.getLast());
+            }
         }
 
 
         if (!overDay.isEmpty()) {
-            List<SeminarTopic> allSessions = overDay.getFirst().getAllSession();
+            List<SeminarTopic> allSessions = new ArrayList<>();
+            allSessions.addAll(overDay.getFirst().getMorningSession());
+            allSessions.addAll(overDay.getFirst().getAfternoonSession());
             overDay.getFirst().removeSession();
+
             for (SeminarDay seminarDay : days) {
                 int morningSessionTime = seminarDay.getMorningSessionTime();
                 int afternoonSessionTime = seminarDay.getAfternoonSessionTime();
-                for (int j = 0; j < allSessions.size(); j++) {
+                int allSessionsSize = allSessions.size();
+                for (int j = 0; j < allSessionsSize; j++) {
                     if (morningSessionTime + allSessions.getFirst().getDuration() <= morningMaxTime && !allSessions.isEmpty()) {
                         seminarDay.addMorningSession(allSessions.removeFirst());
+                        morningSessionTime = seminarDay.getMorningSessionTime();
                     } else if (afternoonSessionTime + allSessions.getFirst().getDuration() <= (maxDayTime - afternoonMaxTime) && !allSessions.isEmpty()) {
                         seminarDay.addAfternoonSession(allSessions.removeFirst());
+                        afternoonSessionTime = seminarDay.getAfternoonSessionTime();
                     }
                 }
             }

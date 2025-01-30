@@ -1,7 +1,7 @@
-package com.wiseSoft.Seminar.service;
+package com.wiseSoft.seminar.service;
 
-import com.wiseSoft.Seminar.model.SeminarTopic;
-import com.wiseSoft.Seminar.util.FormatTime;
+import com.wiseSoft.seminar.model.SeminarTopic;
+import com.wiseSoft.seminar.util.FormatTime;
 
 import java.time.LocalTime;
 import java.util.List;

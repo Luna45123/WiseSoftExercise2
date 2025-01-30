@@ -1,6 +1,6 @@
-package com.wiseSoft.Seminar.service;
+package com.wiseSoft.seminar.service;
 
-import com.wiseSoft.Seminar.model.SeminarDay;
+import com.wiseSoft.seminar.model.SeminarDay;
 
 import java.util.List;
 

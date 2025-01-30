@@ -1,12 +1,12 @@
-package com.wiseSoft.Seminar.test;
+package com.wiseSoft.seminar.test;
 
-import com.wiseSoft.Seminar.model.SeminarDay;
-import com.wiseSoft.Seminar.model.SeminarTopic;
-import com.wiseSoft.Seminar.service.SeminarSchedulerService;
-import com.wiseSoft.Seminar.service.AssignToSession;
-import com.wiseSoft.Seminar.service.GetSchedule;
-import com.wiseSoft.Seminar.util.FormatTime;
-import com.wiseSoft.Seminar.util.IncrementDate;
+import com.wiseSoft.seminar.model.SeminarDay;
+import com.wiseSoft.seminar.model.SeminarTopic;
+import com.wiseSoft.seminar.service.SeminarSchedulerService;
+import com.wiseSoft.seminar.service.AssignToSession;
+import com.wiseSoft.seminar.service.GetSchedule;
+import com.wiseSoft.seminar.util.FormatTime;
+import com.wiseSoft.seminar.util.IncrementDate;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 

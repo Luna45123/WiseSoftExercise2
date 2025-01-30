@@ -1,4 +1,4 @@
-package com.wiseSoft.Seminar.model;
+package com.wiseSoft.seminar.model;
 
 public class SeminarTopic {
     private final String title;

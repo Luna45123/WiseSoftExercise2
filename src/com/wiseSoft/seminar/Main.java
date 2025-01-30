@@ -1,9 +1,9 @@
-package com.wiseSoft.Seminar;
+package com.wiseSoft.seminar;
 
-import com.wiseSoft.Seminar.model.SeminarDay;
-import com.wiseSoft.Seminar.model.SeminarTopic;
-import com.wiseSoft.Seminar.service.PrintSchedule;
-import com.wiseSoft.Seminar.service.SeminarSchedulerService;
+import com.wiseSoft.seminar.model.SeminarDay;
+import com.wiseSoft.seminar.model.SeminarTopic;
+import com.wiseSoft.seminar.service.PrintSchedule;
+import com.wiseSoft.seminar.service.SeminarSchedulerService;
 
 import java.io.IOException;
 import java.nio.file.Files;

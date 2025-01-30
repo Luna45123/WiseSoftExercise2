@@ -1,6 +1,6 @@
-package com.wiseSoft.Seminar.model;
+package com.wiseSoft.seminar.model;
 
-import com.wiseSoft.Seminar.service.GetSchedule;
+import com.wiseSoft.seminar.service.GetSchedule;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -51,12 +51,7 @@ public class SeminarDay {
         morningSession.add(seminarTopic);
     }
 
-    public List<SeminarTopic> getAllSession(){
-        List<SeminarTopic> allSessions = new ArrayList<>();
-        allSessions.addAll(morningSession);
-        allSessions.addAll(afternoonSession);
-        return allSessions;
-    }
+
 
     public void removeSession(){
         morningSession.clear();
