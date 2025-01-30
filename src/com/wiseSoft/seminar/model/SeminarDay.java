@@ -1,7 +1,4 @@
 package com.wiseSoft.seminar.model;
-
-import com.wiseSoft.seminar.service.GetSchedule;
-
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -11,7 +8,6 @@ public class SeminarDay {
     private final LocalDate date;
     private final List<SeminarTopic> morningSession = new ArrayList<>();
     private final List<SeminarTopic> afternoonSession = new ArrayList<>();
-    private final GetSchedule getSchedule = new GetSchedule();
     String datePattern = "dd/MM/";
 
     public SeminarDay(LocalDate date) {
@@ -26,13 +22,12 @@ public class SeminarDay {
         return afternoonSession;
     }
 
-    public String getFormattedDate() {
-        int buddhistYear = date.getYear() + 543;
-        return date.format(DateTimeFormatter.ofPattern(datePattern)) + buddhistYear;
+    public void addAfternoonSession(SeminarTopic seminarTopic){
+        afternoonSession.add(seminarTopic);
     }
 
-    public String getSchedule() {
-        return getSchedule.getSchedule(morningSession,afternoonSession);
+    public void addMorningSession(SeminarTopic seminarTopic){
+        morningSession.add(seminarTopic);
     }
 
     public int getAfternoonSessionTime(){
@@ -43,15 +38,10 @@ public class SeminarDay {
         return morningSession.stream().mapToInt(SeminarTopic::getDuration).sum();
     }
 
-    public void addAfternoonSession(SeminarTopic seminarTopic){
-        afternoonSession.add(seminarTopic);
+    public String getFormattedDate() {
+        int buddhistYear = date.getYear() + 543;
+        return date.format(DateTimeFormatter.ofPattern(datePattern)) + buddhistYear;
     }
-
-    public void addMorningSession(SeminarTopic seminarTopic){
-        morningSession.add(seminarTopic);
-    }
-
-
 
     public void removeSession(){
         morningSession.clear();
