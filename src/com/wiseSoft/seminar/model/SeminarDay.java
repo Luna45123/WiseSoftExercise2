@@ -42,9 +42,4 @@ public class SeminarDay {
         int buddhistYear = date.getYear() + 543;
         return date.format(DateTimeFormatter.ofPattern(datePattern)) + buddhistYear;
     }
-
-    public void removeSession(){
-        morningSession.clear();
-        afternoonSession.clear();
-    }
 }

@@ -4,12 +4,12 @@ import com.wiseSoft.seminar.model.SeminarDay;
 
 import java.util.List;
 
-public class PrintSchedule {
+public class PrintScheduleService {
     public String print(List<SeminarDay> schedule){
         String newLine = System.lineSeparator();
         String dayText = "Day ";
         String space = " - ";
-        GetSchedule getSchedule = new GetSchedule();
+        GetScheduleService getSchedule = new GetScheduleService();
         StringBuilder stringBuilder = new StringBuilder();
         for (int i = 0; i < schedule.size(); i++) {
             SeminarDay day = schedule.get(i);

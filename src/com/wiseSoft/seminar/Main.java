@@ -2,7 +2,7 @@ package com.wiseSoft.seminar;
 
 import com.wiseSoft.seminar.model.SeminarDay;
 import com.wiseSoft.seminar.model.SeminarTopic;
-import com.wiseSoft.seminar.service.PrintSchedule;
+import com.wiseSoft.seminar.service.PrintScheduleService;
 import com.wiseSoft.seminar.service.SeminarSchedulerService;
 
 import java.io.IOException;
@@ -19,7 +19,7 @@ public class Main {
         String path = sc.next();
         List<String> input = Files.readAllLines(Path.of(path));
         SeminarSchedulerService seminarScheduler = new SeminarSchedulerService();
-        PrintSchedule printSchedule = new PrintSchedule();
+        PrintScheduleService printSchedule = new PrintScheduleService();
         // Input Data
         String startDate = input.getFirst();
         List<SeminarTopic> topics = new ArrayList<>();

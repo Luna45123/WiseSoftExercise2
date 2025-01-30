@@ -13,7 +13,8 @@ public class SeminarSchedulerService {
         List<SeminarDay> days = new ArrayList<>();
         List<SeminarDay> overDay = new ArrayList<>();
         IncrementDate incrementDate = new IncrementDate();
-        AssignToSession assignToSession = new AssignToSession();
+        AssignToSessionService assignToSession = new AssignToSessionService();
+        RemoveSessionService removeSession = new RemoveSessionService();
         LocalDate date = LocalDate.parse(startDate);
         int morningMaxTime = 180;
         int afternoonMaxTime = 180;
@@ -21,8 +22,8 @@ public class SeminarSchedulerService {
 
         while (!topics.isEmpty()) {
             SeminarDay day = new SeminarDay(date);
-            assignToSession.assignToSession(day.getMorningSession(), topics, morningMaxTime);
-            assignToSession.assignToSession(day.getAfternoonSession(), topics, afternoonMaxTime);
+            assignToSession.assign(day.getMorningSession(), topics, morningMaxTime);
+            assignToSession.assign(day.getAfternoonSession(), topics, afternoonMaxTime);
             days.add(day);
             date = incrementDate.incrementDate(date);
         }
@@ -38,7 +39,7 @@ public class SeminarSchedulerService {
             List<SeminarTopic> allSessions = new ArrayList<>();
             allSessions.addAll(overDay.getFirst().getMorningSession());
             allSessions.addAll(overDay.getFirst().getAfternoonSession());
-            overDay.getFirst().removeSession();
+            removeSession.remove(overDay.getFirst());
 
             for (SeminarDay seminarDay : days) {
                 int morningSessionTime = seminarDay.getMorningSessionTime();

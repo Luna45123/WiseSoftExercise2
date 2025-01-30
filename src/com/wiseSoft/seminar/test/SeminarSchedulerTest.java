@@ -3,8 +3,8 @@ package com.wiseSoft.seminar.test;
 import com.wiseSoft.seminar.model.SeminarDay;
 import com.wiseSoft.seminar.model.SeminarTopic;
 import com.wiseSoft.seminar.service.SeminarSchedulerService;
-import com.wiseSoft.seminar.service.AssignToSession;
-import com.wiseSoft.seminar.service.GetSchedule;
+import com.wiseSoft.seminar.service.AssignToSessionService;
+import com.wiseSoft.seminar.service.GetScheduleService;
 import com.wiseSoft.seminar.util.FormatTime;
 import com.wiseSoft.seminar.util.IncrementDate;
 import org.junit.jupiter.api.BeforeEach;
@@ -19,14 +19,14 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class SeminarSchedulerTest {
     private SeminarSchedulerService seminarScheduler;
-    private AssignToSession assignToSession;
+    private AssignToSessionService assignToSession;
     private FormatTime formatTime;
     private IncrementDate incrementDate;
 
     @BeforeEach
     void setUp() {
         seminarScheduler = new SeminarSchedulerService();
-        assignToSession = new AssignToSession();
+        assignToSession = new AssignToSessionService();
         formatTime = new FormatTime();
         incrementDate = new IncrementDate();
     }
@@ -53,7 +53,7 @@ class SeminarSchedulerTest {
         topics.add(new SeminarTopic("Test Topic 1", 60));
         topics.add(new SeminarTopic("Test Topic 2", 120));
 
-        assignToSession.assignToSession(session, topics, 180);
+        assignToSession.assign(session, topics, 180);
 
         assertEquals(2, session.size());
         assertEquals(0, topics.size());
@@ -66,7 +66,7 @@ class SeminarSchedulerTest {
         topics.add(new SeminarTopic("Test Topic 1", 90));
         topics.add(new SeminarTopic("Test Topic 2", 90));
 
-        assignToSession.assignToSession(session, topics, 180);
+        assignToSession.assign(session, topics, 180);
 
         assertEquals(2, session.size());
         assertEquals(0, topics.size());
@@ -119,7 +119,7 @@ class SeminarSchedulerTest {
         day.getMorningSession().add(new SeminarTopic("Test Topic", 60));
         day.getAfternoonSession().add(new SeminarTopic("Test Topic 2", 90));
 
-        GetSchedule getSchedule = new GetSchedule();
+        GetScheduleService getSchedule = new GetScheduleService();
         String schedule = getSchedule.getSchedule(day.getMorningSession(), day.getAfternoonSession());
 
         assertTrue(schedule.contains("09:00am Test Topic 60min"));

@@ -5,9 +5,8 @@ import com.wiseSoft.seminar.model.SeminarTopic;
 import java.util.Iterator;
 import java.util.List;
 
-public class AssignToSession {
-    public void assignToSession(List<SeminarTopic> session, List<SeminarTopic> topics, int maxDuration) {
-
+public class AssignToSessionService {
+    public void assign(List<SeminarTopic> session, List<SeminarTopic> topics, int maxDuration) {
         int currentDuration = session.stream().mapToInt(SeminarTopic::getDuration).sum();
         Iterator<SeminarTopic> iterator = topics.iterator();
 

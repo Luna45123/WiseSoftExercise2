@@ -6,7 +6,7 @@ import com.wiseSoft.seminar.util.FormatTime;
 import java.time.LocalTime;
 import java.util.List;
 
-public class GetSchedule {
+public class GetScheduleService {
     public String getSchedule(List<SeminarTopic> morningSession, List<SeminarTopic> afternoonSession) {
         StringBuilder schedule = new StringBuilder();
         FormatTime formatTime = new FormatTime();
