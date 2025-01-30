@@ -27,7 +27,7 @@ public class SeminarSchedulerService {
             days.add(day);
             date = incrementDate.incrementDate(date);
         }
-        // Add over day
+        // Add over day if session time < 4.00pm
         if ((days.getLast().getAfternoonSessionTime() + days.getLast().getMorningSessionTime()) < (morningMaxTime + afternoonMaxTime)) {
             if (!days.getLast().getMorningSession().isEmpty() || !days.getLast().getAfternoonSession().isEmpty()){
                 overDay.add(days.getLast());
