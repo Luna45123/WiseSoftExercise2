@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class SeminarSchedulerService {
-    public List<SeminarDay> scheduleSeminars(String startDate, List<SeminarTopic> topics) {
+    public List<SeminarDay> createScheduleSeminars(String startDate, List<SeminarTopic> topics) {
         List<SeminarDay> days = new ArrayList<>();
         List<SeminarDay> overDay = new ArrayList<>();
         IncrementDate incrementDate = new IncrementDate();

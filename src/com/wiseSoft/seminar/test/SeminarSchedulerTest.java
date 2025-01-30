@@ -108,7 +108,7 @@ class SeminarSchedulerTest {
         topics.add(new SeminarTopic("Topic 18", 30));
         topics.add(new SeminarTopic("Topic 19", 5));
 
-        List<SeminarDay> schedule = seminarScheduler.scheduleSeminars("2022-02-25", topics);
+        List<SeminarDay> schedule = seminarScheduler.createScheduleSeminars("2022-02-25", topics);
         assertFalse(schedule.isEmpty());
         assertEquals(2, schedule.size());
     }

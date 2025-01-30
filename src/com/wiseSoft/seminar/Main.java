@@ -34,7 +34,7 @@ public class Main {
 
         }
         // Schedule Seminars
-        List<SeminarDay> schedule = seminarScheduler.scheduleSeminars(startDate, new ArrayList<>(topics));
+        List<SeminarDay> schedule = seminarScheduler.createScheduleSeminars(startDate, new ArrayList<>(topics));
 
         // Print Schedule
         System.out.print(printSchedule.print(schedule));
