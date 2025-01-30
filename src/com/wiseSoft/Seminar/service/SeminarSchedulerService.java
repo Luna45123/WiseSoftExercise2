@@ -36,14 +36,13 @@ public class SeminarSchedulerService {
             List<SeminarTopic> allSessions = overDay.getFirst().getAllSession();
             overDay.getFirst().removeSession();
             for (SeminarDay seminarDay : days) {
-                int overDaySize = allSessions.size();
-                for (int j = 0; j < overDaySize; j++) {
-                    if (!allSessions.isEmpty()) {
-                        if (seminarDay.getMorningSessionTime() + allSessions.getFirst().getDuration() <= morningMaxTime && !allSessions.isEmpty()) {
-                            seminarDay.addMorningSession(allSessions.removeFirst());
-                        } else if (seminarDay.getAfternoonSessionTime() + allSessions.getFirst().getDuration() <= (maxDayTime - afternoonMaxTime) && !allSessions.isEmpty()) {
-                            seminarDay.addAfternoonSession(allSessions.removeFirst());
-                        }
+                int morningSessionTime = seminarDay.getMorningSessionTime();
+                int afternoonSessionTime = seminarDay.getAfternoonSessionTime();
+                for (int j = 0; j < allSessions.size(); j++) {
+                    if (morningSessionTime + allSessions.getFirst().getDuration() <= morningMaxTime && !allSessions.isEmpty()) {
+                        seminarDay.addMorningSession(allSessions.removeFirst());
+                    } else if (afternoonSessionTime + allSessions.getFirst().getDuration() <= (maxDayTime - afternoonMaxTime) && !allSessions.isEmpty()) {
+                        seminarDay.addAfternoonSession(allSessions.removeFirst());
                     }
                 }
             }
