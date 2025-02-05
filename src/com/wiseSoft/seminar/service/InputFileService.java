@@ -16,7 +16,6 @@ public class InputFileService {
     private static final Pattern DURATION_PATTERN = Pattern.compile("\\s(\\d+)min$");
 
     public List<String> readInputFile(String filePath) throws IOException {
-        // Use try-with-resources to avoid memory leaks
         try (Stream<String> lines = Files.lines(Path.of(filePath))) {
             return lines.collect(Collectors.toList());
         }
@@ -25,7 +24,6 @@ public class InputFileService {
     public List<SeminarTopic> parseSeminarTopics(List<String> input) {
         List<SeminarTopic> topics = new ArrayList<>();
 
-        // Using StringBuilder to optimize string operations
         for (int i = 1; i < input.size(); i++) {
             String line = input.get(i).trim();
             if (!line.isEmpty()) {
@@ -33,7 +31,6 @@ public class InputFileService {
                 if (matcher.find()) {
                     int duration = Integer.parseInt(matcher.group(1));
 
-                    // Using StringBuilder for performance
                     StringBuilder titleBuilder = new StringBuilder(line);
                     titleBuilder.setLength(titleBuilder.length() - matcher.group(0).length());
                     String title = titleBuilder.toString().trim();
