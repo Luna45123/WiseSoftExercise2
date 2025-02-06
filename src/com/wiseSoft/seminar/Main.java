@@ -3,6 +3,7 @@ package com.wiseSoft.seminar;
 import com.wiseSoft.seminar.model.SeminarDay;
 import com.wiseSoft.seminar.model.SeminarTopic;
 import com.wiseSoft.seminar.service.InputFileService;
+import com.wiseSoft.seminar.service.ParseSeminarTopicsService;
 import com.wiseSoft.seminar.service.PrintScheduleService;
 import com.wiseSoft.seminar.service.SeminarSchedulerService;
 
@@ -27,9 +28,10 @@ public class Main {
 
             SeminarSchedulerService seminarScheduler = new SeminarSchedulerService();
             PrintScheduleService printSchedule = new PrintScheduleService();
+            ParseSeminarTopicsService parseSeminarTopics = new ParseSeminarTopicsService();
 
             String startDate = input.getFirst();
-            List<SeminarTopic> topics = fileInputService.parseSeminarTopics(input);
+            List<SeminarTopic> topics = parseSeminarTopics.parseSeminarTopics(input);
 
             List<SeminarDay> schedule = seminarScheduler.createScheduleSeminars(startDate, topics);
 
