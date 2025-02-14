@@ -15,8 +15,8 @@ public class Main {
     public static void main(String[] args) {
         System.out.print("Enter File Path: ");
 
-        try (Scanner sc = new Scanner(System.in)) {
-            String path = sc.next();
+        try {
+            String path = "src/input.txt";
 
             InputFileService fileInputService = new InputFileService();
 
