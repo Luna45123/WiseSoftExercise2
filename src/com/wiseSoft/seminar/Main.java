@@ -14,25 +14,17 @@ public class Main {
     public static void main(String[] args) {
         try {
             String path = "src/input.txt";
-
-            InputFileService fileInputService = new InputFileService();
-
-            List<String> input = fileInputService.readInputFile(path);
+            List<String> input = InputFileService.readInputFile(path);
             if (input.isEmpty()) {
                 System.err.println("Input file is empty or invalid.");
                 return;
             }
-
-            SeminarSchedulerService seminarScheduler = new SeminarSchedulerService();
-            PrintScheduleService printSchedule = new PrintScheduleService();
-            ParseSeminarTopicsService parseSeminarTopics = new ParseSeminarTopicsService();
-
             String startDate = input.getFirst();
-            List<SeminarTopic> topics = parseSeminarTopics.parseSeminarTopics(input);
+            List<SeminarTopic> topics = ParseSeminarTopicsService.parseSeminarTopics(input);
 
-            List<SeminarDay> schedule = seminarScheduler.createScheduleSeminars(startDate, topics);
+            List<SeminarDay> schedule = SeminarSchedulerService.createScheduleSeminars(startDate, topics);
 
-            System.out.print(printSchedule.print(schedule));
+            System.out.print(PrintScheduleService.printSchedule(schedule));
 
         } catch (IOException e) {
             System.err.println("Error reading file: " + e.getMessage());

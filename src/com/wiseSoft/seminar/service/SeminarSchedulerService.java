@@ -9,12 +9,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class SeminarSchedulerService {
-    public List<SeminarDay> createScheduleSeminars(String startDate, List<SeminarTopic> topics) {
+    public static List<SeminarDay> createScheduleSeminars(String startDate, List<SeminarTopic> topics) {
         List<SeminarDay> days = new ArrayList<>();
         List<SeminarDay> overDay = new ArrayList<>();
-        IncrementDate incrementDate = new IncrementDate();
-        AssignToSessionService assignToSession = new AssignToSessionService();
-        RemoveSessionService removeSession = new RemoveSessionService();
         LocalDate date = LocalDate.parse(startDate);
         int morningMaxTime = 180;
         int afternoonMaxTime = 180;
@@ -22,10 +19,10 @@ public class SeminarSchedulerService {
 
         while (!topics.isEmpty()) {
             SeminarDay day = new SeminarDay(date);
-            assignToSession.assign(day.getMorningSession(), topics, morningMaxTime);
-            assignToSession.assign(day.getAfternoonSession(), topics, afternoonMaxTime);
+            AssignToSessionService.assign(day.getMorningSession(), topics, morningMaxTime);
+            AssignToSessionService.assign(day.getAfternoonSession(), topics, afternoonMaxTime);
             days.add(day);
-            date = incrementDate.incrementDate(date);
+            date = IncrementDate.incrementDate(date);
         }
         // Add over day if session time < 4.00pm
         if (!days.getLast().getMorningSession().isEmpty() || !days.getLast().getAfternoonSession().isEmpty()){
@@ -40,7 +37,7 @@ public class SeminarSchedulerService {
             List<SeminarTopic> allSessions = new ArrayList<>();
             allSessions.addAll(overDay.getFirst().getMorningSession());
             allSessions.addAll(overDay.getFirst().getAfternoonSession());
-            removeSession.remove(overDay.getFirst());
+            RemoveSessionService.remove(overDay.getFirst());
 
             for (SeminarDay seminarDay : days) {
                 int morningSessionTime = seminarDay.getMorningSessionTime();
@@ -55,7 +52,7 @@ public class SeminarSchedulerService {
                         afternoonSessionTime = seminarDay.getAfternoonSessionTime();
                     }
                     //break if day full
-                    if (morningSessionTime + afternoonSessionTime >= maxDayTime){
+                    if (morningSessionTime + afternoonSessionTime >= maxDayTime || allSessions.isEmpty()){
                         break;
                     }
                 }

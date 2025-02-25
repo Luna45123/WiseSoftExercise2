@@ -8,7 +8,7 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class InputFileService {
-    public List<String> readInputFile(String filePath) throws IOException {
+    public static List<String> readInputFile(String filePath) throws IOException {
         try (Stream<String> lines = Files.lines(Path.of(filePath))) {
             return lines.collect(Collectors.toList());
         }

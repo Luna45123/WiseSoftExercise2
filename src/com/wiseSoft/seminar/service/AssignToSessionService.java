@@ -6,7 +6,7 @@ import java.util.Iterator;
 import java.util.List;
 
 public class AssignToSessionService {
-    public void assign(List<SeminarTopic> session, List<SeminarTopic> topics, int maxDuration) {
+    public static void assign(List<SeminarTopic> session, List<SeminarTopic> topics, int maxDuration) {
         int currentDuration = session.stream().mapToInt(SeminarTopic::duration).sum();
         Iterator<SeminarTopic> iterator = topics.iterator();
 

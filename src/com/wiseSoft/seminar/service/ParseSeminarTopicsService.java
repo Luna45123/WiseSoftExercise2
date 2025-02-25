@@ -9,7 +9,7 @@ import java.util.regex.Pattern;
 
 public class ParseSeminarTopicsService {
     private static final Pattern DURATION_PATTERN = Pattern.compile("\\s(\\d+)min$");
-    public List<SeminarTopic> parseSeminarTopics(List<String> input) {
+    public static List<SeminarTopic> parseSeminarTopics(List<String> input) {
         List<SeminarTopic> topics = new ArrayList<>();
 
         for (int i = 1; i < input.size(); i++) {
@@ -18,7 +18,6 @@ public class ParseSeminarTopicsService {
                 Matcher matcher = DURATION_PATTERN.matcher(line);
                 if (matcher.find()) {
                     int duration = Integer.parseInt(matcher.group(1));
-
                     StringBuilder titleBuilder = new StringBuilder(line);
                     titleBuilder.setLength(titleBuilder.length() - matcher.group(0).length());
                     String title = titleBuilder.toString().trim();
