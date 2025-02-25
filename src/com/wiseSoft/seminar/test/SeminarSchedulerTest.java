@@ -18,18 +18,7 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.*;
 
 class SeminarSchedulerTest {
-    private SeminarSchedulerService seminarScheduler;
-    private AssignToSessionService assignToSession;
-    private FormatTime formatTime;
-    private IncrementDate incrementDate;
-
     @BeforeEach
-    void setUp() {
-        seminarScheduler = new SeminarSchedulerService();
-        assignToSession = new AssignToSessionService();
-        formatTime = new FormatTime();
-        incrementDate = new IncrementDate();
-    }
 
     @Test
     void testSeminarTopicCreation() {
@@ -53,7 +42,7 @@ class SeminarSchedulerTest {
         topics.add(new SeminarTopic("Test Topic 1", 60));
         topics.add(new SeminarTopic("Test Topic 2", 120));
 
-        assignToSession.assign(session, topics, 180);
+        AssignToSessionService.assign(session, topics, 180);
 
         assertEquals(2, session.size());
         assertEquals(0, topics.size());
@@ -66,7 +55,7 @@ class SeminarSchedulerTest {
         topics.add(new SeminarTopic("Test Topic 1", 90));
         topics.add(new SeminarTopic("Test Topic 2", 90));
 
-        assignToSession.assign(session, topics, 180);
+        AssignToSessionService.assign(session, topics, 180);
 
         assertEquals(2, session.size());
         assertEquals(0, topics.size());
@@ -75,13 +64,13 @@ class SeminarSchedulerTest {
     @Test
     void testFormatTime() {
         LocalTime time = LocalTime.of(9, 0);
-        assertEquals("09:00am", formatTime.formatTime(time));
+        assertEquals("09:00am", FormatTime.formatTime(time));
     }
 
     @Test
     void testIncrementDate() {
         LocalDate date = LocalDate.of(2022, 2, 25);
-        LocalDate newDate = incrementDate.incrementDate(date);
+        LocalDate newDate = IncrementDate.incrementDate(date);
         assertEquals(LocalDate.of(2022, 2, 28), newDate); // Skipping weekend
     }
 
@@ -108,7 +97,7 @@ class SeminarSchedulerTest {
         topics.add(new SeminarTopic("Topic 18", 30));
         topics.add(new SeminarTopic("Topic 19", 5));
 
-        List<SeminarDay> schedule = seminarScheduler.createScheduleSeminars("2022-02-25", topics);
+        List<SeminarDay> schedule = SeminarSchedulerService.createScheduleSeminars("2022-02-25", topics);
         assertFalse(schedule.isEmpty());
         assertEquals(2, schedule.size());
     }
@@ -116,13 +105,14 @@ class SeminarSchedulerTest {
     @Test
     void testSchedulePrinting() {
         SeminarDay day = new SeminarDay(LocalDate.of(2022, 2, 25));
+        List<SeminarDay> days = new ArrayList<>();
         day.getMorningSession().add(new SeminarTopic("Test Topic", 60));
         day.getAfternoonSession().add(new SeminarTopic("Test Topic 2", 90));
 
-        //String schedule = PrintScheduleService.getSchedule(day.getMorningSession(), day.getAfternoonSession());
+        String schedule = PrintScheduleService.printSchedule(days);
 
-//        assertTrue(schedule.contains("09:00am Test Topic 60min"));
-//        assertTrue(schedule.contains("01:00pm Test Topic 2 90min"));
+        assertTrue(schedule.contains("09:00am Test Topic 60min"));
+        assertTrue(schedule.contains("01:00pm Test Topic 2 90min"));
     }
 }
 
