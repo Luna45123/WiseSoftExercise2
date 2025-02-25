@@ -105,12 +105,11 @@ class SeminarSchedulerTest {
     @Test
     void testSchedulePrinting() {
         SeminarDay day = new SeminarDay(LocalDate.of(2022, 2, 25));
-        List<SeminarDay> days = new ArrayList<>();
         day.getMorningSession().add(new SeminarTopic("Test Topic", 60));
         day.getAfternoonSession().add(new SeminarTopic("Test Topic 2", 90));
-
+        List<SeminarDay> days = new ArrayList<>();
+        days.add(day);
         String schedule = PrintScheduleService.printSchedule(days);
-
         assertTrue(schedule.contains("09:00am Test Topic 60min"));
         assertTrue(schedule.contains("01:00pm Test Topic 2 90min"));
     }
