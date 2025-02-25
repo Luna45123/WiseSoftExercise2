@@ -34,8 +34,8 @@ class SeminarSchedulerTest {
     @Test
     void testSeminarTopicCreation() {
         SeminarTopic topic = new SeminarTopic("Test Seminar", 60);
-        assertEquals("Test Seminar", topic.getTitle());
-        assertEquals(60, topic.getDuration());
+        assertEquals("Test Seminar", topic.title());
+        assertEquals(60, topic.duration());
     }
 
     @Test

@@ -31,11 +31,11 @@ public class SeminarDay {
     }
 
     public int getAfternoonSessionTime(){
-        return afternoonSession.stream().mapToInt(SeminarTopic::getDuration).sum();
+        return afternoonSession.stream().mapToInt(SeminarTopic::duration).sum();
     }
 
     public int getMorningSessionTime(){
-        return morningSession.stream().mapToInt(SeminarTopic::getDuration).sum();
+        return morningSession.stream().mapToInt(SeminarTopic::duration).sum();
     }
 
     public String getFormattedDate() {

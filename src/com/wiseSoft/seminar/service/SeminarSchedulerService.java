@@ -28,11 +28,12 @@ public class SeminarSchedulerService {
             date = incrementDate.incrementDate(date);
         }
         // Add over day if session time < 4.00pm
-        if ((days.getLast().getAfternoonSessionTime() + days.getLast().getMorningSessionTime()) < (morningMaxTime + afternoonMaxTime)) {
-            if (!days.getLast().getMorningSession().isEmpty() || !days.getLast().getAfternoonSession().isEmpty()){
+        if (!days.getLast().getMorningSession().isEmpty() || !days.getLast().getAfternoonSession().isEmpty()){
+            if ((days.getLast().getAfternoonSessionTime() + days.getLast().getMorningSessionTime()) < (morningMaxTime + afternoonMaxTime)) {
                 overDay.add(days.getLast());
             }
         }
+
 
 
         if (!overDay.isEmpty()) {
@@ -46,10 +47,10 @@ public class SeminarSchedulerService {
                 int afternoonSessionTime = seminarDay.getAfternoonSessionTime();
                 int allSessionsSize = allSessions.size();
                 for (int j = 0; j < allSessionsSize; j++) {
-                    if (morningSessionTime + allSessions.getFirst().getDuration() <= morningMaxTime && !allSessions.isEmpty()) {
+                    if (morningSessionTime + allSessions.getFirst().duration() <= morningMaxTime && !allSessions.isEmpty()) {
                         seminarDay.addMorningSession(allSessions.removeFirst());
                         morningSessionTime = seminarDay.getMorningSessionTime();
-                    } else if (afternoonSessionTime + allSessions.getFirst().getDuration() <= (maxDayTime - afternoonMaxTime) && !allSessions.isEmpty()) {
+                    } else if (afternoonSessionTime + allSessions.getFirst().duration() <= (maxDayTime - afternoonMaxTime) && !allSessions.isEmpty()) {
                         seminarDay.addAfternoonSession(allSessions.removeFirst());
                         afternoonSessionTime = seminarDay.getAfternoonSessionTime();
                     }

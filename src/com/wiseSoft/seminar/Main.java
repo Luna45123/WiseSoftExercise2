@@ -12,8 +12,6 @@ import java.util.List;
 
 public class Main {
     public static void main(String[] args) {
-        System.out.print("Enter File Path: ");
-
         try {
             String path = "src/input.txt";
 
